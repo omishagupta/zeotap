@@ -1,0 +1,4 @@
+harnessApiVersion: '1.0'
+type: DOCKER
+imageName: omisha/alpine-smarter
+serverName: Harness Docker Hub
