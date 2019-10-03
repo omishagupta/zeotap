@@ -76,13 +76,17 @@ preDeploymentSteps:
     publishAsVar: false
     scriptString: |-
       cp Setup/Applications/sample-app .
+
       #create docker image out of code
+      # push image
     scriptType: BASH
     sshKeyRef: null
     sweepingOutputName: null
     sweepingOutputScope: null
     tags: ''
-    templateVariables: ''
+    templateUuid: null
+    templateVariables: null
+    templateVersion: null
     timeoutMillis: 60000
 rollbackPhases:
 - type: KUBERNETES
