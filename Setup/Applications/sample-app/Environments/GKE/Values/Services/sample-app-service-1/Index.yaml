@@ -1,0 +1,8 @@
+harnessApiVersion: '1.0'
+type: APPLICATION_MANIFEST_VALUES_ENV_SERVICE_OVERRIDE
+gitFileConfig:
+  branch: staging
+  connectorName: github-to-harness
+  filePath: https://github.com/omishagupta95/zeotap/blob/staging/main.py
+  useBranch: true
+storeType: Remote
