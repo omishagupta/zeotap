@@ -15,4 +15,22 @@ notificationRules:
   userGroupAsExpression: false
   userGroupIds:
   - NrpTXUerQamXn5KqbUNXig
+preDeploymentSteps:
+- type: SHELL_SCRIPT
+  name: Shell Script
+  properties:
+    commandPath: null
+    connectionAttributes: null
+    executeOnDelegate: true
+    host: null
+    outputVars: ''
+    publishAsVar: false
+    scriptString: cp Setup/Applications/sample-app .
+    scriptType: BASH
+    sshKeyRef: null
+    sweepingOutputName: null
+    sweepingOutputScope: null
+    tags: ''
+    templateVariables: ''
+    timeoutMillis: 60000
 templatized: false
