@@ -15,6 +15,37 @@ notificationRules:
   userGroupAsExpression: false
   userGroupIds:
   - NrpTXUerQamXn5KqbUNXig
+phases:
+- type: KUBERNETES
+  computeProviderName: connection-by-omisha
+  daemonSet: false
+  infraMappingName: us-central1-a_harness -GCP_Kubernetes--Google Cloud Platform- connection-by-omisha- harness-delegate
+  name: Canary
+  phaseSteps:
+  - type: K8S_PHASE_STEP
+    name: Deploy
+    steps:
+    - type: K8S_CANARY_DEPLOY
+      name: Canary Deployment
+      properties:
+        instanceUnitType: COUNT
+        instances: '1'
+    stepsInParallel: false
+  - type: K8S_PHASE_STEP
+    name: Verify
+    stepsInParallel: false
+  - type: K8S_PHASE_STEP
+    name: Wrap Up
+    steps:
+    - type: K8S_DELETE
+      name: Canary Delete
+      properties:
+        instanceUnitType: COUNT
+        resources: ${k8s.canaryWorkload}
+    stepsInParallel: false
+  provisionNodes: false
+  serviceName: sample-app-service-1
+  statefulSet: false
 preDeploymentSteps:
 - type: SHELL_SCRIPT
   name: Shell Script
@@ -33,4 +64,24 @@ preDeploymentSteps:
     tags: ''
     templateVariables: ''
     timeoutMillis: 60000
+rollbackPhases:
+- type: KUBERNETES
+  computeProviderName: connection-by-omisha
+  daemonSet: false
+  infraMappingName: us-central1-a_harness -GCP_Kubernetes--Google Cloud Platform- connection-by-omisha- harness-delegate
+  name: Rollback Canary
+  phaseNameForRollback: Canary
+  phaseSteps:
+  - type: K8S_PHASE_STEP
+    name: Deploy
+    phaseStepNameForRollback: Deploy
+    statusForRollback: SUCCESS
+    stepsInParallel: false
+  - type: K8S_PHASE_STEP
+    name: Wrap Up
+    phaseStepNameForRollback: Wrap Up
+    stepsInParallel: false
+  provisionNodes: false
+  serviceName: sample-app-service-1
+  statefulSet: false
 templatized: false
