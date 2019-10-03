@@ -46,6 +46,48 @@ phases:
   provisionNodes: false
   serviceName: sample-app-service-1
   statefulSet: false
+postDeploymentSteps:
+- type: SHELL_SCRIPT
+  name: Shell Script
+  properties:
+    commandPath: null
+    connectionAttributes: null
+    executeOnDelegate: true
+    host: null
+    outputVars: ''
+    publishAsVar: false
+    scriptString: '# deploy that application on kubernetes'
+    scriptType: BASH
+    sshKeyRef: null
+    sweepingOutputName: null
+    sweepingOutputScope: null
+    tags: ''
+    templateVariables: ''
+    timeoutMillis: 60000
+preDeploymentSteps:
+- type: SHELL_SCRIPT
+  name: Shell Script
+  properties:
+    commandPath: null
+    connectionAttributes: null
+    executeOnDelegate: true
+    host: null
+    outputVars: ''
+    publishAsVar: false
+    scriptString: |-
+      cp Setup/Applications/sample-app .
+
+      #create docker image out of code
+      # push image
+    scriptType: BASH
+    sshKeyRef: null
+    sweepingOutputName: null
+    sweepingOutputScope: null
+    tags: ''
+    templateUuid: null
+    templateVariables: null
+    templateVersion: null
+    timeoutMillis: 60000
 rollbackPhases:
 - type: KUBERNETES
   computeProviderName: connection-by-omisha
