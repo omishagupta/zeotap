@@ -10,4 +10,5 @@ spec:
       command: [ echo, SUCCESS ]
   imagePullSecrets:
     - name: regcred
+    
 
